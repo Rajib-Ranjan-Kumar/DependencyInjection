@@ -2,11 +2,13 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+      id("kotlin-kapt")
+
 }
 
 android {
     namespace = "com.example.dependencyinjection"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.dependencyinjection"
@@ -56,4 +58,11 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation ("com.google.dagger:dagger:2.45")
+    annotationProcessor ("com.google.dagger:dagger-compiler:2.45")
+
+    // For Kotlin
+    kapt ("com.google.dagger:dagger-compiler:2.45")
+    kapt("androidx.room:room-compiler:2.6.1")
 }

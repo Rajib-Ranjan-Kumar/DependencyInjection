@@ -22,7 +22,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DependencyInjectionTheme {
-
+                val userRepository: UserRepository=UserRepository()
+                val emailService: EmailService=EmailService()
+                val newUser=UserRegistrationService(userRepository,emailService)
+                newUser.registerUser("jaiswalrajib@123gmail.com","1234567")
+            }
             }
         }
     }
@@ -30,13 +34,3 @@ class MainActivity : ComponentActivity() {
 
 
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    DependencyInjectionTheme {
-        val userRepository: UserRepository=UserRepository()
-         val emailService: EmailService=EmailService()
-        val newUser=UserRegistrationService(userRepository,emailService)
-        newUser.registerUser("jaiswalrajib@123gmail.com","1234567")
-    }
-}
