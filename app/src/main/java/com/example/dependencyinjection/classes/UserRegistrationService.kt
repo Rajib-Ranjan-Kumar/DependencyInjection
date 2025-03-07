@@ -1,11 +1,25 @@
-package com.example.dependencyinjection.classes
+package com.example.dependencyinjection.services
 
-class UserRegistrationService(
-    private val userRepository: UserRepository, private val emailService: EmailService
+import javax.inject.Inject
+
+class UserRepository @Inject constructor() {
+    fun saveUser(email: String, pass: String) {
+        println("User saved: $email")
+    }
+}
+
+class EmailService @Inject constructor() {
+    fun sendEmail(email: String) {
+        println("Email sent to: $email")
+    }
+}
+
+class UserRegistrationService @Inject constructor(
+    private val userRepository: UserRepository,
+    private val emailService: EmailService
 ) {
-
-    fun registerUser(email: String, password: String) {
-        userRepository.saveUser(email, password)
-        emailService.send(email, "no-reply123@gmail.com", "U have register new email")
+    fun registerUser(email: String, pass: String) {
+        userRepository.saveUser(email, pass)
+        emailService.sendEmail(email)
     }
 }

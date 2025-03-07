@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-      id("kotlin-kapt")
+    kotlin("kapt")
 
 }
 
@@ -59,10 +59,11 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation ("com.google.dagger:dagger:2.45")
-    annotationProcessor ("com.google.dagger:dagger-compiler:2.45")
+    dependencies {
+        implementation("com.google.dagger:dagger:2.50") // Use latest version
+        kapt("com.google.dagger:dagger-compiler:2.50") // Ensure this is added
 
-    // For Kotlin
-    kapt ("com.google.dagger:dagger-compiler:2.45")
-    kapt("androidx.room:room-compiler:2.6.1")
+        // Other dependencies
+    }
+
 }
